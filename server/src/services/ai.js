@@ -44,7 +44,7 @@ export async function embed(textos, tipo = 'passage') {
   return salida;
 }
 
-/** Chat con NVIDIA NIM. Devuelve el texto de respuesta. */
+/** Chat con NVIDIA NIM. Devuelve el texto de respuesta (sin razonamiento). */
 export async function chat(messages, { temperature = 0.2, maxTokens = 1024 } = {}) {
   const res = await client().chat.completions.create({
     model: config.chatModel,
@@ -52,6 +52,7 @@ export async function chat(messages, { temperature = 0.2, maxTokens = 1024 } = {
     temperature,
     max_tokens: maxTokens,
     stream: false,
+    chat_template_kwargs: { enable_thinking: false },
   });
   return res?.choices?.[0]?.message?.content?.trim() || '';
 }

@@ -8,8 +8,8 @@ export const config = {
   supabaseAnonKey: env('SUPABASE_ANON_KEY'),
   nvidiaApiKey: env('NVIDIA_API_KEY'),
   nvidiaBaseUrl: env('NVIDIA_BASE_URL', 'https://integrate.api.nvidia.com/v1'),
-  chatModel: env('AI_CHAT_MODEL', 'nvidia/nemotron-3-nano-30b-a3b'),
-  embedModel: env('AI_EMBED_MODEL', 'nvidia/nv-embedqa-e5-v5'),
+  chatModel: env('AI_CHAT_MODEL', 'nvidia/nemotron-3.5-lightning-30b-a3b'),
+  embedModel: env('AI_EMBED_MODEL', 'nvidia/nemotron-3.5-embed-1b'),
   clientOrigins: env('CLIENT_ORIGIN', 'http://localhost:5173')
     .split(',')
     .map((s) => s.trim().replace(/\/+$/, ''))
