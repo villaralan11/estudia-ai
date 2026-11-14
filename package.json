@@ -1,0 +1,15 @@
+{
+  "name": "estudia-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "App tipo NotebookLM con Supabase (pgvector + RLS), Express y NVIDIA NIM",
+  "scripts": {
+    "install:all": "npm --prefix server install && npm --prefix client install",
+    "dev": "npm --prefix server run dev & npm --prefix client run dev & wait",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "test": "npm --prefix server test && npm --prefix client test",
+    "lint": "npm --prefix server run lint && npm --prefix client run lint",
+    "build": "npm --prefix client run build"
+  }
+}
