@@ -1,18 +1,21 @@
 import { createClient } from '@supabase/supabase-js';
+import ws from 'ws';
 import { config } from '../config.js';
 
-// Cliente anónimo global: solo para verificar JWT (auth.getUser) y nada más.
-function anonOptions() {
-  return { auth: { persistSession: false, autoRefreshToken: false } };
-}
+// Node 20 no trae WebSocket nativo: supabase-js necesita un transporte explícito.
+const nodeOptions = {
+  auth: { persistSession: false, autoRefreshToken: false },
+  realtime: { transport: ws },
+};
 
+// Cliente anónimo global: solo para verificar JWT (auth.getUser) y nada más.
 let _anon;
 export function getAnonClient() {
   if (!_anon) {
     _anon = createClient(
       config.supabaseUrl || 'http://localhost:54321',
       config.supabaseAnonKey || 'anon-key-placeholder',
-      anonOptions(),
+      nodeOptions,
     );
   }
   return _anon;
@@ -27,7 +30,7 @@ export function createUserClient(token) {
   return createClient(
     config.supabaseUrl || 'http://localhost:54321',
     config.supabaseAnonKey || 'anon-key-placeholder',
-    { ...anonOptions(), global: { headers: { Authorization: `Bearer ${token}` } } },
+    { ...nodeOptions, global: { headers: { Authorization: `Bearer ${token}` } } },
   );
 }
 
