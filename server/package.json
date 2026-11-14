@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "node --watch src/index.js",
     "start": "node src/index.js",
+    "build": "node -e \"\" // serverless en Vercel: build no-op",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
     "lint": "eslint ."
   },
